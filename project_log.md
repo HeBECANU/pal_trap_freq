@@ -117,6 +117,7 @@ freq_period=[22.54,10;
 - tight trap for kick and drop
 c:\remote\settings202011Sep102156.xml
 the delay we want to change is 147
+<<<<<<< HEAD
 - try to edit this file c:\remote\settings202011Sep105121.xml
 
 Success!
@@ -186,3 +187,19 @@ c:\remote\settings202014Sep144008.xml
 - will opt BEC a bit and set up a outcoupling period scan
 - maanged to get a good atom number improvement to 36k counts
 - zeeman slower only allows you to opt for ~9min before it gets to hot
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> 17dda722625c9f70a674ed9507cf83dfcd13d818
