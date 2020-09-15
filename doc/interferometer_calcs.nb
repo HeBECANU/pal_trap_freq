@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     81891,       1524]
-NotebookOptionsPosition[     79483,       1477]
-NotebookOutlinePosition[     79829,       1492]
-CellTagsIndexPosition[     79786,       1489]
+NotebookDataLength[     81993,       1526]
+NotebookOptionsPosition[     79585,       1479]
+NotebookOutlinePosition[     79931,       1494]
+CellTagsIndexPosition[     79888,       1491]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -481,8 +481,9 @@ Cell[BoxData[
      RowBox[{"2", "\[Pi]", "*", 
       SuperscriptBox["10", 
        RowBox[{"-", "3"}]]}]}], "}"}]}], "]"}]], "Input",
- CellChangeTimes->{{3.8091328706162157`*^9, 
-  3.809132935994743*^9}},ExpressionUUID->"7b0d0d1c-6389-429a-9039-\
+ CellChangeTimes->{{3.8091328706162157`*^9, 3.809132935994743*^9}, {
+  3.8091338305088496`*^9, 
+  3.8091338790711875`*^9}},ExpressionUUID->"7b0d0d1c-6389-429a-9039-\
 2d68db35706a"],
 
 Cell[BoxData[
@@ -1432,7 +1433,7 @@ XJ6rlIxsr0SDt7kCnyczIPHC8IpgeRHy3Npyo+EzAwaEUqp95L6guKMMZasv
 DBB9sEvOUi4ZDrad2PQ2kwHvRlKZF8oLoPaWCLs7mwE94XhgVXY5OGxg1kjl
 MoC/wHmpdfknzEXlfXL8xoCI5c2XHwg0wP8AQfgeHA==
        "]]},
-     Annotation[#, "Charting`Private`Tag$65582#1"]& ]}, {}, {}},
+     Annotation[#, "Charting`Private`Tag$70094#1"]& ]}, {}, {}},
   AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
   Axes->{True, True},
   AxesLabel->{None, None},
@@ -1470,12 +1471,13 @@ MoC/wHmpdfknzEXlfXL8xoCI5c2XHwg0wP8AQfgeHA==
      Scaled[0.05], 
      Scaled[0.05]}},
   Ticks->{Automatic, Automatic}]], "Output",
- CellChangeTimes->{{3.8091328763432627`*^9, 
-  3.8091329363805504`*^9}},ExpressionUUID->"c38f08ee-3d51-4b08-ad35-\
-0cf88ca7b3b7"]
+ CellChangeTimes->{{3.8091328763432627`*^9, 3.8091329363805504`*^9}, {
+  3.809133844390931*^9, 
+  3.809133880460269*^9}},ExpressionUUID->"59ea77df-3f27-4c4b-8ddd-\
+0bf08be42c42"]
 }, Open  ]]
 },
-WindowSize->{972, 988},
+WindowSize->{958, 988},
 WindowMargins->{{Automatic, -7}, {Automatic, 0}},
 FrontEndVersion->"11.2 for Microsoft Windows (64-bit) (September 10, 2017)",
 StyleDefinitions->"Default.nb"
@@ -1523,12 +1525,10 @@ Cell[8842, 260, 10474, 190, 228, "Output",ExpressionUUID->"89afea04-e506-498e-80
 }, Open  ]],
 Cell[19331, 453, 248, 4, 34, "Text",ExpressionUUID->"30b89621-0c61-4dea-bdac-e2d49e5a05af"],
 Cell[CellGroupData[{
-Cell[19604, 461, 825, 24, 32, "Input",ExpressionUUID->"7b0d0d1c-6389-429a-9039-2d68db35706a"],
-Cell[20432, 487, 59035, 987, 230, "Output",ExpressionUUID->"c38f08ee-3d51-4b08-ad35-0cf88ca7b3b7"]
+Cell[19604, 461, 878, 25, 32, "Input",ExpressionUUID->"7b0d0d1c-6389-429a-9039-2d68db35706a"],
+Cell[20485, 488, 59084, 988, 230, "Output",ExpressionUUID->"59ea77df-3f27-4c4b-8ddd-0bf08be42c42"]
 }, Open  ]]
 }
 ]
 *)
-
-(* End of internal cache information *)
 
