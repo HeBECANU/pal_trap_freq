@@ -3,7 +3,16 @@
 All the ways to measure trap freq with a He* BEC
 
 
-## methods
+## Install
+
+``` 
+git clone --recurse-submodules -j8 https://github.com/HeBECANU/Trap_freq_methods.git
+```
+then to update 
+```
+git submodule update --init --recursive --remote --merge
+```
+
 
 
 
