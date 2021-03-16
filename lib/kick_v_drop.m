@@ -1,8 +1,8 @@
-import_opts.dir = 'Y:\TDC_user\ProgramFiles\my_read_tdc_gui_v1.0.1\dld_output\20200911_kick_drop_standard_trap';
+import_opts.dir = 'Z:\EXPERIMENT-DATA\2020_trap_freq_met\20200911_kick_drop_standard_trap';
 data = import_mcp_tdc_data(import_opts);
 
 %% Get log
-log_dir = 'C:\Users\BEC Machine\cloudstor\labview control code\2017v1\mat_files\logs';
+log_dir = import_opts.dir;
 log_file = 'log_LabviewMatlab.txt';
 tf = fopen(fullfile(log_dir,log_file));
 logdata = textscan(tf,'%s%s%u%s%f%s%f%s%f','Delimiter',',');

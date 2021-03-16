@@ -187,19 +187,29 @@ c:\remote\settings202014Sep144008.xml
 - will opt BEC a bit and set up a outcoupling period scan
 - maanged to get a good atom number improvement to 36k counts
 - zeeman slower only allows you to opt for ~9min before it gets to hot
-=======
+- changed ZS fittings for cleaning
+  - nylong tubing will allow for cleaning with ethanol and sodium hydroxide
+  - set up tests in beakers with ethanol and degreaser
+- made some progress in improving flux
+- ZS donger was still in
+- source keeps dropping out so fustrating
+- lost 2nd mot when adjusting push beam, cant see any signal on "0.6 s mot load" or "4s mot load"
+- got push beam back and happy on BEC donger
+- still cant see any 2nd mot light
+- checked flipper mirrors are in right position
+- tried adjusting push beam freq and poinging to see 2nd mot signal
+- no luck, heading home 
+- leaving source to run at high pressure as sometimes this helps it behave better
+- argg =(
 
 
+2020-09-15 1340 bryce
+-se up camera on 2nd mot
+- got signal 
+- maybe it was becasue the trap supply was off
+- got upwards of 158 mv on 0.5s mot load 
+- 4s mot load pretty low at 24mv
+- source is very unstable
+- no BEC i think because the 4s load is too low
 
 
-
-
-
-
-
-
-
-
-
-
->>>>>>> 17dda722625c9f70a674ed9507cf83dfcd13d818
