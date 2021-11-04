@@ -11,10 +11,23 @@
 % email: Bryce.Henson@live.com
 % Last revision:2018-10-01
 % BEGIN USER VAR-------------------------------------------------
-anal_opts=[]
-%anal_opts.tdc_import.dir='Y:\TDC_user\ProgramFiles\my_read_tdc_gui_v1.0.1\dld_output\20181017_probe_off_trap_freq_drift\';
-% anal_opts.tdc_import.dir='Y:\TDC_user\ProgramFiles\my_read_tdc_gui_v1.0.1\dld_output\20181102_raman_even_better_opt\';
-anal_opts.tdc_import.dir = 'D:\trap_freq_data\normal_trap_freq\freq_space_method\20170410 80.00Hz';
+anal_opts=[];
+
+anal_opts.tdc_import.dir = 'Z:\EXPERIMENT-DATA\2020_trap_freq_met\misc\aliasing_trap_freq\kicked_atom_laser image';
+
+%'Z:\EXPERIMENT-DATA\2020_trap_freq_met\stability_measures\20181017_two_probe_off_trap_freq_drift';
+
+% 'Z:\EXPERIMENT-DATA\2020_trap_freq_met\20181017_probe_off_trap_freq_drift';
+% 'Z:\EXPERIMENT-DATA\2020_trap_freq_met\aliasing_trap_freq\segmented_long\run1';
+% 'Z:\EXPERIMENT-DATA\2020_trap_freq_met\20210616_trap_stability_measure';%20210622_good_trap_freq_mesaure';%20210622_low_fit_err_good_trap_freq_mesaure';%
+
+%'Y:\TDC_user\ProgramFiles\my_read_tdc_gui_v1.0.1\dld_output\'D:\trap_freq_data\normal_trap_freq\freq_space_method\20170410 80.00Hz';
+
+%Z:\EXPERIMENT-DATA\2020_trap_freq_met\aliasing_trap_freq\aliasing\d 80 or
+%160 or 90
+%Z:\EXPERIMENT-DATA\2020_trap_freq_met\20210615_tune_trap_pal_good_atom_num_2\d
+%Z:\EXPERIMENT-DATA\2020_trap_freq_met\aliasing_trap_freq\segmented_long\d
+
 anal_opts.tdc_import.file_name='d';
 anal_opts.tdc_import.force_load_save=false;   %takes precidence over force_reimport
 anal_opts.tdc_import.force_reimport=false;
@@ -27,11 +40,11 @@ tlim=[0,4];
 anal_opts.tdc_import.txylim=[tlim;tmp_xlim;tmp_ylim];
 
 
-anal_opts.atom_laser.pulsedt=8.000e-3;
-anal_opts.atom_laser.t0=0.41784; %center i ntime of the first pulse
+anal_opts.atom_laser.pulsedt=7.5e-3;%10.000e-3;%8.000e-3;%
+anal_opts.atom_laser.t0=0.264;%0.41784; %0.8762;%center i ntime of the first pulse
 anal_opts.atom_laser.start_pulse=1; %atom laser pulse to start with
-anal_opts.atom_laser.pulses=100;
-anal_opts.atom_laser.appr_osc_freq_guess=[52,40,40];
+anal_opts.atom_laser.pulses=190;%130;%50;%300;%375;%260;%300;%
+anal_opts.atom_laser.appr_osc_freq_guess=[11,11,11];
 anal_opts.atom_laser.pulse_twindow=anal_opts.atom_laser.pulsedt*0.9;
 anal_opts.atom_laser.xylim=anal_opts.tdc_import.txylim(2:3,:); %set same lims for pulses as import
 
@@ -44,7 +57,7 @@ anal_opts.trig_ai_in=20;
 
 
 anal_opts.osc_fit.binsx=1000;
-anal_opts.osc_fit.blur=1;
+anal_opts.osc_fit.blur=0.3;
 anal_opts.osc_fit.xlim=[-20,20]*1e-3;
 anal_opts.osc_fit.tlim=[0.86,1.08];
 anal_opts.osc_fit.dimesion=2; %Select coordinate to bin. 1=X, 2=Y.
@@ -58,7 +71,7 @@ folder = fileparts(which(mfilename));
 folder=strsplit(folder,filesep); %go up a directory
 folder=strjoin(folder(1:end-1),filesep);
 % Add that folder plus all subfolders to the path.
-addpath(genpath(folder));
+% addpath(genpath(folder));
 
 hebec_constants
 anal_opts.tdc_import.mat_save=false;
@@ -67,9 +80,11 @@ anal_opts.global.fall_velocity=const.g0*anal_opts.global.fall_time; %velocity wh
 % fall_dist=1/2 a t^2 
 %TODO get from engineering documents
 anal_opts.global.fall_dist=(1/2)*const.g0*anal_opts.global.fall_time^2;
-anal_opts.atom_laser.plot.all=false;
+anal_opts.atom_laser.plot=false;
 %anal_opts.atom_laser.t0=0.417770;
 anal_opts.atom_laser.global=anal_opts.global; %coppy global into the options structure
+const.fall_disntace = anal_opts.global.fall_dist;
+anal_opts.atom_laser.c = const;
 
 % if anal_opts.tdc_import.dir(end) ~= '\', dirpath = [dirpath '\']; end
 % if (exist([anal_opts.tdc_import.dir,'out'], 'dir') == 0), mkdir([anal_opts.tdc_import.dir,'out']); end
@@ -118,10 +133,11 @@ title('num count run trend')
 %% Bin pulses
 
 data.mcp_tdc.all_ok=data.mcp_tdc.num_ok;
-data.mcp_tdc.al_pulses=bin_al_pulses(anal_opts.atom_laser,data);
+data.mcp_tdc.al_pulses=bin_al_pulses(data.mcp_tdc,anal_opts.atom_laser);
+
 %%
 anal_opts.osc_fit.adaptive_freq=true; %estimate the starting trap freq 
-anal_opts.osc_fit.appr_osc_freq_guess=[52,46.7,40];
+anal_opts.osc_fit.appr_osc_freq_guess=[52,46.7,40];%[50,12,37];%
 anal_opts.osc_fit.plot_fits=false;
 anal_opts.osc_fit.plot_err_history=true;
 anal_opts.osc_fit.plot_fit_corr=false;
@@ -129,74 +145,171 @@ anal_opts.osc_fit.freq_fit_tolerance = 1;
 
 anal_opts.osc_fit.global=anal_opts.global;
 data.osc_fit=fit_trap_freq(anal_opts.osc_fit,data);
-
+%%
 data.osc_fit.trap_freq_recons=nan*data.osc_fit.ok.did_fits;
-mask=data.osc_fit.ok.did_fits;
+mask=data.osc_fit.ok.did_fits & (data.osc_fit.model_coefs(:,2,1)<49).' & (data.osc_fit.model_coefs(:,2,1)>20).';
 data.osc_fit.trap_freq_recons(mask)=3*(1/anal_opts.atom_laser.pulsedt)+data.osc_fit.model_coefs(mask,2,1);
 data.osc_fit.trap_freq_unc=nan*mask;
 data.osc_fit.trap_freq_unc(mask)=data.osc_fit.model_coefs(mask,2,2)';
 
 %%
+n=1;
+%[800 2375];% or [450 2378];%
+shot_lims = [450 2378];%[800 2375];%[800 2375];%[450 2378];%[155 2375];%[0 inf];
+mask2 = mask & (data.mcp_tdc.shot_num>shot_lims(1)) & (data.mcp_tdc.shot_num<shot_lims(2));
+std_2 = nanstd(data.osc_fit.trap_freq_recons(mask2));
+mean_2 = nanmean(data.osc_fit.trap_freq_recons(mask2));
+%nanmean(data.osc_fit.trap_freq_unc(mask2));
 
-sfigure(1);
-errorbar(data.osc_fit.dld_shot_num,...
-    data.osc_fit.trap_freq_recons,data.osc_fit.trap_freq_unc,...
+sfigure(10099+n);
+clf
+errorbar(data.osc_fit.dld_shot_num(mask2),...
+    data.osc_fit.trap_freq_recons(mask2),data.osc_fit.trap_freq_unc(mask2),...
     'kx-','MarkerSize',7,'CapSize',0,'LineWidth',1)
+hold on
+t_vec = linspace(data.osc_fit.dld_shot_num(1).*0.8,data.osc_fit.dld_shot_num(end).*1.2,1e4);
+mean_vec = mean_2.*ones(size(t_vec));
+plot(t_vec,mean_vec+std_2,'r-','LineWidth',1.5)
+plot(t_vec,mean_vec-std_2,'r-','LineWidth',1.5)
+plot(t_vec,mean_vec,'b--','LineWidth',1.5)
 xlabel('Shot Number')
 ylabel('Fit Trap Freq')
 pause(1e-6)
 
 
+data_time=data.mcp_tdc.time_create_write(data.osc_fit.dld_shot_idx,2);
+data_time=(data_time-min(data_time))./3600;
+h1=sfigure(13099+n);
+clf
+time_vec = data_time(mask2);
+% errorbar(time_vec-time_vec(1),...
+%     data.osc_fit.trap_freq_recons(mask2)-mean_2,data.osc_fit.trap_freq_unc(mask2),...
+%     'ko','MarkerSize',1.1,'CapSize',0,'LineWidth',1,'MarkerFaceColor','k')
+plot(time_vec-time_vec(1),...
+    1e3.*(data.osc_fit.trap_freq_recons(mask2)-mean_2),...
+    'k-','MarkerSize',1.1,'LineWidth',0.41,'MarkerFaceColor','k')
+hold on
+t_vec = linspace(data_time(1).*0.8-data_time(1),data_time(end).*1.2,1e4);
+mean_vec = 0.*ones(size(t_vec));
+plot(t_vec,1e3.*(mean_vec+std_2),'r-','LineWidth',1.5)
+plot(t_vec,1e3.*(mean_vec-std_2),'r-','LineWidth',1.5)
+plot(t_vec,1e3.*mean_vec,'b--','LineWidth',1.5)
+xlabel('Time (hours)')
+ylabel('Trap Drift, $f_a-\bar{f_a}$ (mHz)')
+xlim([0 max(time_vec-time_vec(1))])
+set(gca,'FontSize',16)
+pause(1e-6)
+
+nanstd(data.osc_fit.trap_freq_recons(mask2));
+nanmean(data.osc_fit.trap_freq_unc(mask2));
+set(h1,'Units','Inches');
+pos = get(h1,'Position');
+set(h1,'PaperPositionMode','Auto','PaperUnits','Inches','PaperSize',[pos(3), pos(4)])
+print(h1,'trap_drift_vs_time','-dpdf','-r0')
+
+%% histogram
+h2=figure(18828)
+clf
+shot_lims = [450 2378];%[18 1500];
+mask3 = mask & (data.mcp_tdc.shot_num>shot_lims(1)) & (data.mcp_tdc.shot_num<shot_lims(2));
+mean_3 = nanmean(data.osc_fit.model_coefs(mask3,2,1));
+
+h=histogram(1e3.*(data.osc_fit.model_coefs(mask3,2,1)-mean_3),100);
+pd = fitdist(-mean_3+data.osc_fit.model_coefs(mask3,2,1),'Normal');
+x_values = linspace(46-mean_3,46.5-mean_3,1e5);
+y = pdf(pd,x_values);
+hold on
+plot(x_values.*1e3,y.*2,'LineWidth',1.8)
+xlim(1e3.*([46.23 46.37]-mean_3))
+h.FaceColor = [0.5 0.5 0.5];
+h.EdgeColor = [0.5 0.5 0.5];
+set(gca,'FontSize',14)
+xlabel('Trap Drift, \(f_a-\bar{f_a}\) (mHz)')
+ylabel('Counts')
+
+set(h2,'Units','Inches');
+pos = get(h2,'Position');
+set(h2,'PaperPositionMode','Auto','PaperUnits','Inches','PaperSize',[pos(3), pos(4)])
+print(h2,'trap_drift_hist','-dpdf','-r0')
+
+
+h3=figure(18858)
+clf
+shot_lims = [450 2378];%[18 1500];
+mask3 = mask & (data.mcp_tdc.shot_num>shot_lims(1)) & (data.mcp_tdc.shot_num<shot_lims(2));
+h2=histogram(data.osc_fit.model_coefs(mask3,2,2).*1e3,100);
+
+pd2 = fitdist(data.osc_fit.model_coefs(mask3,2,2).*1e3,'Normal');
+x_values = linspace(4,9,1e5);
+y = pdf(pd2,x_values);
+hold on
+plot(x_values,y.*90,'LineWidth',1.8)
+xlim([4.3,9])
+xlabel('Single Shot Uncertainty, \(\delta f_a\) (mHz)')
+ylabel('Counts')
+set(gca,'FontSize',14)
+h2.FaceColor = [0.5 0.5 0.5];
+h2.EdgeColor = [0.5 0.5 0.5];
+
+set(h3,'Units','Inches');
+pos = get(h3,'Position');
+set(h3,'PaperPositionMode','Auto','PaperUnits','Inches','PaperSize',[pos(3), pos(4)])
+print(h3,'unc_hist','-dpdf','-r0')
+
 %% allan
 
-
+shot_lims = [450 2378];%[800 2375];%[155 500];%[155 800];%[155 2375];%[18 802];
 allan_data=[];
-allan_data.freq=data.osc_fit.trap_freq_recons;
+allan_data.freq=data.osc_fit.trap_freq_recons-mean(data.osc_fit.trap_freq_recons);
 allan_data.time=data.mcp_tdc.time_create_write(data.osc_fit.dld_shot_idx,2);
-mask=~isnan(allan_data.freq) & ~isnan(allan_data.time)';
+mask=~isnan(allan_data.freq) & ~isnan(allan_data.time)' & (data.mcp_tdc.shot_num>shot_lims(1)) & (data.mcp_tdc.shot_num<shot_lims(2));
 allan_data.freq=allan_data.freq(mask);
 allan_data.time=allan_data.time(mask);
 allan_data.time=allan_data.time-min(allan_data.time);
-tau_in=2.^(-10:0.05:14);
+tau_in=2.^(-12:0.1:14);%allan_data.time;%linspace(0.1,10^4);%
 %%
 
-[retval, s, errorb, tau]=allan(allan_data,tau_in)
+[retval, s, errorb, tau]=allan(allan_data,tau_in);
 
 %%
-windows=[];
+windows=[260 2700];%3300
 
-fit_out=plot_allan_with_fits(retval, errorb, tau,windows,'Normal Allan Deviation')
-
-
+ha=plot_allan_with_fits(retval, errorb, tau,windows,'Normal Allan Deviation');
+set(gca,'FontSize',16)
+%%
+set(ha,'Units','Inches');
+pos = get(ha,'Position');
+set(ha,'PaperPositionMode','Auto','PaperUnits','Inches','PaperSize',[pos(3), pos(4)])
+% print(ha,'allan_deviation','-dpdf','-r0')
 
 %%
-[retval, s, errorb, tau]=allan_overlap(allan_data,2.^(-10:0.005:20))
+% [retval, s, errorb, tau]=allan_overlap(allan_data,2.^(-10:0.005:20))
 %%
 windows=[[57,160];[249,528];[1000,1563];[2091,inf]];
-fit_out=plot_allan_with_fits(retval, errorb, tau,windows,'Overlapping Allan Deviation')
+% fit_out=plot_allan_with_fits(retval, errorb, tau,windows,'Overlapping Allan Deviation');
 
-
+data.osc_fit.trap_freq_unc
 
 %%
-[retval, s, errorb, tau]=allan_modified(allan_data,2.^(-10:0.01:20))
+% [retval, s, errorb, tau]=allan_modified(allan_data,2.^(-10:0.01:20))
 
 %%
 windows=[[0,256];[1000,1563];[1885,3092];[4040,inf]];
-fit_out=plot_allan_with_fits(retval, errorb, tau,windows,'Modified Allan Deviation')
+% fit_out=plot_allan_with_fits(retval, errorb, tau,windows,'Modified Allan Deviation')
 
 
 %%
-function fits=plot_allan_with_fits(retval, errorb, tau,windows,dev_label)
+function h=plot_allan_with_fits(retval, errorb, tau,windows,dev_label)
 font_size = 18;
 font_type='cmr10' 
 mask_outliers=retval<1;
-figure(1)
+h=figure;
 clf
 set(gcf,'color','w')
-plot(tau(mask_outliers),retval(mask_outliers),'k-')
+plot(tau(mask_outliers),retval(mask_outliers),'k-','LineWidth',1.6)
 hold on
-plot(tau(mask_outliers),retval(mask_outliers)+errorb(mask_outliers),'-','Color',[1,1,1]*0.5)
-plot(tau(mask_outliers),retval(mask_outliers)-errorb(mask_outliers),'-','Color',[1,1,1]*0.5)
+% plot(tau(mask_outliers),retval(mask_outliers)+errorb(mask_outliers),'-','Color',[1,1,1]*0.5)
+% plot(tau(mask_outliers),retval(mask_outliers)-errorb(mask_outliers),'-','Color',[1,1,1]*0.5)
 set(gca, 'YScale', 'log')
 set(gca, 'XScale', 'log')
 pause(1e-6)
@@ -215,11 +328,11 @@ end
 xlim(xl)
 ylim(yl)
 hold off
-title(dev_label,'FontSize',font_size*1.5,'FontName',font_type)
-xlabel('\tau (s)','FontSize',font_size,'FontName',font_type)
-ylabel('\sigma(\tau) (Hz)','FontSize',font_size,'FontName',font_type)
-legend(labels,'FontName',font_type,'FontSize',font_size*0.8,'location','northeast')
-
+%title(dev_label,'FontSize',font_size*1.5,'FontName',font_type)
+xlabel('Averaging, $\tau$ (s)','FontSize',font_size,'FontName',font_type)
+ylabel('Allan Deviation, $\sigma(\tau)$ (Hz)','FontSize',font_size,'FontName',font_type)
+%legend(labels,'FontName',font_type,'FontSize',font_size*0.8,'location','northeast')
+grid on
 
 
 end

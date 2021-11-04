@@ -58,7 +58,9 @@ for ii=1:iimax
         xyzerr_tmp(:,sqrtn<2)=nan;
 
         %remove any data pts with nan position
+        num_mask=(data.mcp_tdc.al_pulses.num_counts(ii,:)>5)';
         mask=sum(isnan(txyz_tmp),2)==0;
+        mask=mask&num_mask;
         xyzerr_tmp=xyzerr_tmp(mask,:);
         txyz_tmp=txyz_tmp(mask,:);
 
@@ -107,7 +109,7 @@ for ii=1:iimax
                        [-10,10]*1e-3;... % gradient
                        ];        
         gf_opt.start=[fit_amp, fit_freq, fit_phase, fit_offset,0,0,2,0];
-        gf_opt.rmse_thresh=2e-3;
+        gf_opt.rmse_thresh=4e-3;
         gf_opt.plot=false;
         gf_opt.level=2;
         gf_out=global_fit(predictor,response,modelfun,gf_opt);
@@ -139,6 +141,9 @@ for ii=1:iimax
         %fprintf('sampling limit %2.3g Hz, fint unc %2.3g Hz, ratio %2.3g \n',[frequnclim,fitparam{2,2},fitparam{2,2}/frequnclim])
         osc_fit.fit_sample_limit{ii}=[frequnclim,fitparam{2,2},fitparam{2,2}/frequnclim];
         %%
+        if ii == iimax
+            dum=0;
+        end
         if anal_opts_osc_fit.plot_fits
             font_name='cmr10';
             font_size_global=20;
@@ -199,7 +204,7 @@ for ii=1:iimax
             ax = gca;
             set(ax, {'XColor', 'YColor'}, {'k', 'k'});
             set(gca,'linewidth',1.0)
-            saveas(gca,sprintf('%sfit_dld_shot_num%04u.png',anal_opts_osc_fit.global.out_dir,dld_shot_num))
+%             saveas(gca,sprintf('%sfit_dld_shot_num%04u.png',anal_opts_osc_fit.global.out_dir,dld_shot_num))
             
             stfig(fit_resid_plot_handle);
             subplot(4,1,1)
@@ -285,7 +290,7 @@ if anal_opts_osc_fit.plot_err_history
     plot(osc_fit.fit_rmse(osc_fit.ok.did_fits))
     xlabel('shot idx')
     ylabel('RMSE')
-    saveas(gca,sprintf('%sfits_rmse_history.png',anal_opts_osc_fit.global.out_dir))
+%     saveas(gca,sprintf('%sfits_rmse_history.png',anal_opts_osc_fit.global.out_dir))
     
 end
 
@@ -358,8 +363,8 @@ if anal_opts_osc_fit.plot_fit_corr
 
     set(gcf, 'Units', 'pixels', 'Position', [100, 100, 1600, 900])
     plot_name='fit_correlations';
-    saveas(gcf,[anal_opts_osc_fit.global.out_dir,plot_name,'.png'])
-    saveas(gcf,[anal_opts_osc_fit.global.out_dir,plot_name,'.fig'])
+%     saveas(gcf,[anal_opts_osc_fit.global.out_dir,plot_name,'.png'])
+%     saveas(gcf,[anal_opts_osc_fit.global.out_dir,plot_name,'.fig'])
 end
 
 

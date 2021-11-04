@@ -1,10 +1,13 @@
-shots_per_point = 6;
-freq = [100:4:140];
-marker = mod(floor((i-1)/shots_per_point)+1,length(freq)); %Counts from 1 to num shots before setpt update
+shots_per_point = 3;
+freq = [50:2:140];
+marker = mod(floor((i-1)/shots_per_point),length(freq))+1; %Counts from 1 to num shots before setpt update
 
 
 % file = 'C:\Remote\settings202021Jul105753.xml';
-file = 'c:\remote\settings202130Apr135234.xml'; 
+file = 'c:\remote\settings202110Jun134945.xml';
+% 'c:\remote\settings202110Jun113704.xml';%
+% 'c:\remote\settings202109Jun155146.xml';
+% 'c:\remote\settings202130Apr135234.xml'; 
 %'c:\remote\settings202117Mar100852.xml'; 
 % 'c:\remote\settings202117Mar100624.xml';%'c:\remote\settings202116Mar150002.xml';%'c:\remote\settings202111Mar100454.xml';
 % c:\remote\settings202117Mar092334.xml
@@ -24,7 +27,7 @@ fclose(file_id);
 % delete(file);   % DEBUG - delete xml file
 %% make adjustments
 
-
+% freq = [100:4:140];
 low_time = (1/freq(marker))-1e-3;
 low_time_str = num2str(low_time,6);
 
