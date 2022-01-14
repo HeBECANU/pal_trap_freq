@@ -272,7 +272,7 @@ tau_in=2.^(-12:0.1:14);%allan_data.time;%linspace(0.1,10^4);%
 [retval, s, errorb, tau]=allan(allan_data,tau_in);
 
 %%
-windows=[260 2700];%3300
+windows=[0 3500];%[260 2700;260 3100;260 3800; 260 3900];%3300
 
 ha=plot_allan_with_fits(retval, errorb, tau,windows,'Normal Allan Deviation');
 set(gca,'FontSize',16)
@@ -280,7 +280,7 @@ set(gca,'FontSize',16)
 set(ha,'Units','Inches');
 pos = get(ha,'Position');
 set(ha,'PaperPositionMode','Auto','PaperUnits','Inches','PaperSize',[pos(3), pos(4)])
-% print(ha,'allan_deviation','-dpdf','-r0')
+print(ha,'allan_deviation_fit','-dpdf','-r0')
 
 %%
 % [retval, s, errorb, tau]=allan_overlap(allan_data,2.^(-10:0.005:20))
@@ -308,8 +308,8 @@ clf
 set(gcf,'color','w')
 plot(tau(mask_outliers),retval(mask_outliers),'k-','LineWidth',1.6)
 hold on
-% plot(tau(mask_outliers),retval(mask_outliers)+errorb(mask_outliers),'-','Color',[1,1,1]*0.5)
-% plot(tau(mask_outliers),retval(mask_outliers)-errorb(mask_outliers),'-','Color',[1,1,1]*0.5)
+plot(tau(mask_outliers),retval(mask_outliers)+errorb(mask_outliers),'-','Color',[1,1,1]*0.5)
+plot(tau(mask_outliers),retval(mask_outliers)-errorb(mask_outliers),'-','Color',[1,1,1]*0.5)
 set(gca, 'YScale', 'log')
 set(gca, 'XScale', 'log')
 pause(1e-6)
@@ -322,7 +322,12 @@ for ii=1:size(windows,1)
     windows(ii,:)
     mask_fit=tau>windows(ii,1) & tau<windows(ii,2) & mask_outliers;
     fits{ii}=polyfit(log10(tau(mask_fit)),log10(retval(mask_fit)),1);
-    plot(tausamp,10.^polyval(fits{ii},log10(tausamp)));
+    mdlfun = @(b,x) (x).^(-0.5).*b(1);
+    b0 = 0.06;
+    mdl = fitnlm(tau(mask_fit),retval(mask_fit),mdlfun,b0);
+    b1 = mdl.Coefficients.Estimate;
+%     plot(tausamp,10.^polyval(fits{ii},log10(tausamp)));
+    plot(tausamp,10.^polyval([-0.5 log10(b1)],log10(tausamp)),'r--','LineWidth',2);
     labels{end+1}=sprintf('Lin. Fit to Section (grad %.2f)',fits{ii}(1))
 end
 xlim(xl)
