@@ -2,3 +2,4 @@
 	path = lib/Core_BEC_Analysis
 	url = https://github.com/brycehenson/Core_BEC_Analysis.git
 	branch = dev
+	update = merge

@@ -5,6 +5,8 @@ addpath('./lib/Core_BEC_Analysis/lib/') %add the path to set_up_project_path, th
                   % in this case it should be './lib/Core_BEC_Analysis/lib/'
 set_up_project_path
 
+
+
 %%
 %osc_function=@(x) (3*sin(x*2*pi*417+1)).^1.4+1.6;
 %osc_function=@(x) (3*sin(x*2*pi*417+1))+1.6;
