@@ -1,6 +1,7 @@
-# Trap_freq_methods
-**[Bryce M. Henson](https://github.com/brycehenson), [Jacob A. Ross](https://github.com/GroundhogState),[Kieran F. Thomas](https://github.com/KF-Thomas)**  
-All the ways to measure trap freq with a He* BEC
+# Pulsed Atom Laser Trap Frequncey Measurement
+**[Bryce M. Henson](https://github.com/brycehenson), [Kieran F. Thomas](https://github.com/KF-Thomas), [Jacob A. Ross](https://github.com/GroundhogState)**  
+
+Measure trap freq with a pulsed atom laser. 
 
 
 ## Install
