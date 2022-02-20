@@ -1,0 +1,96 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      2941,         88]
+NotebookOptionsPosition[      2272,         69]
+NotebookOutlinePosition[      2678,         85]
+CellTagsIndexPosition[      2635,         82]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{"tmax", "=", "1"}], "\[IndentingNewLine]", 
+ RowBox[{"x", "=", 
+  RowBox[{"A", " ", 
+   RowBox[{"Sin", "[", 
+    RowBox[{"t", "*", "2", "*", "\[Pi]"}], "]"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"N", "[", 
+  RowBox[{
+   FractionBox["1", "tmax"], 
+   RowBox[{"Integrate", "[", 
+    RowBox[{
+     RowBox[{
+      FractionBox["1", "2"], "m", " ", 
+      SuperscriptBox["\[Omega]", "2"], 
+      SuperscriptBox["x", "2"]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"t", ",", "0", ",", "tmax"}], "}"}]}], "]"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.8528538109064894`*^9, 3.852853852258789*^9}, {
+  3.8528539189480224`*^9, 3.8528539231862345`*^9}, {3.852853953610352*^9, 
+  3.852854061675782*^9}},
+ CellLabel->"In[29]:=",ExpressionUUID->"ac82b93c-98ee-4a2a-8459-9625e201eeeb"],
+
+Cell[BoxData["1"], "Output",
+ CellChangeTimes->{
+  3.852853923828186*^9, 3.852853954589366*^9, {3.8528539965905333`*^9, 
+   3.852854061972768*^9}},
+ CellLabel->"Out[29]=",ExpressionUUID->"bec4558f-6cca-4d99-bcfd-3a3b0ca79b7a"],
+
+Cell[BoxData[
+ RowBox[{"A", " ", 
+  RowBox[{"Sin", "[", 
+   RowBox[{"2", " ", "\[Pi]", " ", "t"}], "]"}]}]], "Output",
+ CellChangeTimes->{
+  3.852853923828186*^9, 3.852853954589366*^9, {3.8528539965905333`*^9, 
+   3.8528540619841614`*^9}},
+ CellLabel->"Out[30]=",ExpressionUUID->"cb0fc464-7dc8-443c-8822-1160494e5079"],
+
+Cell[BoxData[
+ RowBox[{"0.25`", " ", 
+  SuperscriptBox["A", "2"], " ", "m", " ", 
+  SuperscriptBox["\[Omega]", "2"]}]], "Output",
+ CellChangeTimes->{
+  3.852853923828186*^9, 3.852853954589366*^9, {3.8528539965905333`*^9, 
+   3.852854062037223*^9}},
+ CellLabel->"Out[31]=",ExpressionUUID->"bc33a563-afe2-4004-9157-1af1a4080008"]
+}, Open  ]]
+},
+WindowSize->{760.5, 735.75},
+WindowMargins->{{Automatic, 211.5}, {Automatic, 48}},
+FrontEndVersion->"12.1 for Microsoft Windows (64-bit) (June 19, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"15264483-305f-4b98-9d86-6410de86604d"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 796, 20, 82, "Input",ExpressionUUID->"ac82b93c-98ee-4a2a-8459-9625e201eeeb"],
+Cell[1379, 44, 226, 4, 32, "Output",ExpressionUUID->"bec4558f-6cca-4d99-bcfd-3a3b0ca79b7a"],
+Cell[1608, 50, 318, 7, 32, "Output",ExpressionUUID->"cb0fc464-7dc8-443c-8822-1160494e5079"],
+Cell[1929, 59, 327, 7, 32, "Output",ExpressionUUID->"bc33a563-afe2-4004-9157-1af1a4080008"]
+}, Open  ]]
+}
+]
+*)
+

@@ -252,8 +252,8 @@ box on
 set(gca,'linewidth', 1.1)
 set(gca,'TickLength',[0.025,0])
 set(gca, {'XColor', 'YColor'}, {[1,1,1]*0.2, [1,1,1]*0.2});
-
 legend([ebh,predh,cih,oih],'Meas.','Fit','CI','OI')
+xlim(anal_opts.atom_num_fit.pulses+[-1,1])
 
 set(gcf,'Units','Pixels')
 %set(gcf,'Position',[1068,355,676,453])
@@ -271,8 +271,8 @@ pause(1e-9)
 
 %%
 %grid on
-%fig_name='pal_atom_num_fit_short';
-fig_name='pal_atom_num_fit_long';
+fig_name='pal_atom_num_fit_short';
+%fig_name='pal_atom_num_fit_long';
 %fig_name='pal_mean_v_acc_dyn_static';
 fig_dir='./figs/thesis_figs';
 export_fig(fullfile(fig_dir,strcat(fig_name,'.svg')))
