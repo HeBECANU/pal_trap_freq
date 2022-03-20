@@ -94,6 +94,8 @@ anal_opts.atom_laser.plot=false;
 anal_opts.atom_laser.global=anal_opts.global; %coppy global into the options structure
 const.fall_disntace = anal_opts.global.fall_dist;
 anal_opts.atom_laser.c = const;
+anal_opts.atom_laser.plot=[];
+anal_opts.atom_laser.plot.all=false;
 
 % if anal_opts.tdc_import.dir(end) ~= '\', dirpath = [dirpath '\']; end
 % if (exist([anal_opts.tdc_import.dir,'out'], 'dir') == 0), mkdir([anal_opts.tdc_import.dir,'out']); end
@@ -142,7 +144,7 @@ title('num count run trend')
 %% Bin pulses
 
 data.mcp_tdc.all_ok=data.mcp_tdc.num_ok;
-data.mcp_tdc.al_pulses=bin_al_pulses(data.mcp_tdc,anal_opts.atom_laser);
+data.mcp_tdc.al_pulses=bin_al_pulses(anal_opts.atom_laser,data);
 
 %%
 anal_opts.osc_fit.adaptive_freq=true; %estimate the starting trap freq 
@@ -340,6 +342,7 @@ fit_options.plot_options={{'--','Color','r'}}
 
 [ha,fit_dets]=plot_allan_with_fits(sigma_tau, errorb, tau,fit_options,'Allan Deviation');
 set(gca,'FontSize',16)
+
 set(ha,'Units','Inches');
 pos = get(ha,'Position');
 set(ha,'PaperPositionMode','Auto','PaperUnits','Inches','PaperSize',[pos(3), pos(4)])
@@ -351,7 +354,7 @@ exportgraphics(gca,'./figs/trap_allan.pdf')
 
 
 %%
-function [h,fits]=plot_allan_with_fits(sigma_tau, errorb, tau,fit_options,dev_label)
+function [h,fits,labels]=plot_allan_with_fits(sigma_tau, errorb, tau,fit_options,dev_label)
 plot_handles={};
 windows=fit_options.windows;
 font_size = 18;
@@ -384,11 +387,15 @@ for ii=1:size(windows,1)
     plot_handles{2+ii}=plot(tausamp(mask_plot),10.^polyval(fits{ii},log10(tausamp(mask_plot))),...
         fit_options.plot_options{ii}{:},'LineWidth',2);
     %labels{end+1}=sprintf('Lin. Fit $\\sigma(\\tau)=%.2f\\tau^{%.2f}$',-fits{ii}(2),fits{ii}(1))
-    labels{end+1}=sprintf('Lin. Fit')
+    labels{end+1}=sprintf('Linear Fit')
 end
 xlim(xl)
 ylim(yl)
 hold off
+
+plot_handles{end+1}=xline(24,'b-.','LineWidth',1.6)
+labels{end+1}='Measurement Time'
+
 %title(dev_label,'FontSize',font_size*1.5,'FontName',font_type)
 xlabel('Averaging, $\tau$ (s)','FontSize',font_size,'FontName',font_type)
 ylabel('Allan Deviation, $\sigma(\tau)$ (Hz)','FontSize',font_size,'FontName',font_type)
