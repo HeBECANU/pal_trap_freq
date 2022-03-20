@@ -164,7 +164,7 @@ errorbar(data.mcp_tdc.al_pulses.time_cen-data.mcp_tdc.al_pulses.time_cen(1,1),1e
 ylabel('$y$ velocity (mm/s)')
 % ylabel('$$ velocity (mm/s)')
 xlabel('Time (s)')
-title('Velocity Space')
+%title('Velocity Space')
 set(gca,'FontSize',17)
 xlim([0 1.46])
 ylim([-15 20])
@@ -172,6 +172,7 @@ ylim([-15 20])
 % xlim([0 0.19])
 %%
 %stfig('fourier transform oscillations');
+stfig('oscillation plot');
 tdat = data.mcp_tdc.al_pulses.time_cen-data.mcp_tdc.al_pulses.time_cen(1,1);
 tint = linspace(0,1.46911,1e4);
 n=5e3;
@@ -228,6 +229,7 @@ fwhm(f,P1,0.667)./2
 % subplot(1,panes,pane_counter);
 %         pane_counter=pane_counter+1;
 % stfig('position hist');
+stfig('oscillation plot');
 % subplot(1,2,1)
 axes('Position',[.25 .73 .2 .16])
 box on
@@ -269,20 +271,22 @@ xlabel('T (s)','FontSize',13)
 %%
 subplot(1,2,2)
 plot(f,P1.*1e3,'k-','LineWidth',1.8)
-title('Fourier Space')
+%title('Fourier Space')
 xlabel('Frequency (Hz)')
 ylabel('Fourier Amplitude (arb.)')
 set(gca,'FontSize',17)
+set(gca,'XScale','log')
 xlim([0 max(f)])
 fwhm(f,P1,0.5)./2.35
 fwhm(f,P1,0.667)./2
+xticks([10 50 100 500 1000])
 %%
 
 %%
 set(h,'Units','Inches');
 pos = get(h,'Position');
 set(h,'PaperPositionMode','Auto','PaperUnits','Inches','PaperSize',[pos(3), pos(4)])
-% print(h,'oscillations_unaliased_pdf','-dpdf','-r0')
+print(h,'oscillations_unaliased_pdf_2','-dpdf','-r0')
 
 %%
 
