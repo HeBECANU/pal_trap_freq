@@ -13,7 +13,7 @@
 % BEGIN USER VAR-------------------------------------------------
 anal_opts=[];
 
-anal_opts.tdc_import.dir = 'Z:\EXPERIMENT-DATA\2020_trap_freq_met\misc\aliasing_trap_freq\kicked_atom_laser image';
+anal_opts.tdc_import.dir = 'Z:\EXPERIMENT-DATA\2020_trap_freq_met\misc\aliasing_trap_freq\kicked_atom_laser_image';
 
 %'Z:\EXPERIMENT-DATA\2020_trap_freq_met\stability_measures\20181017_two_probe_off_trap_freq_drift';
 
