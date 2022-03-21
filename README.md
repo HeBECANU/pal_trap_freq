@@ -7,7 +7,7 @@ Measure trap freq with a pulsed atom laser. [arXiv:2201.10021](https://arxiv.org
 ## Install
 
 ``` 
-git clone --recurse-submodules -j8 https://github.com/HeBECANU/Trap_freq_methods.git
+git clone --recurse-submodules -j8 https://github.com/HeBECANU/pal_trap_freq.git
 ```
 then to update 
 ```
