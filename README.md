@@ -1,7 +1,7 @@
-# Pulsed Atom Laser Trap Frequncey Measurement
+# Trap Frequency Measurement with a Pulsed Atom Laser
 **[Bryce M. Henson](https://github.com/brycehenson), [Kieran F. Thomas](https://github.com/KF-Thomas), [Jacob A. Ross](https://github.com/GroundhogState)**  
 
-Measure trap freq with a pulsed atom laser. 
+Measure trap freq with a pulsed atom laser. [arXiv:2201.10021](https://arxiv.org/abs/2201.10021)
 
 
 ## Install
